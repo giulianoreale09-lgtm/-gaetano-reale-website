@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gaetano Reale GmbH – Bauunternehmen und Immobilienentwickler aus Tübingen. Hoch- und Tiefbau, schlüsselfertiges Bauen, Immobilienvermittlung. Qualität seit 1999.">
+    <meta name="keywords" content="Bauunternehmen Tübingen, Immobilien Tübingen, Hochbau, Tiefbau, schlüsselfertig, Gaetano Reale, Bauträger, Sanitär">
+    <meta name="author" content="Gaetano Reale GmbH">
+    <meta property="og:title" content="Gaetano Reale GmbH – Bauen mit Charakter">
+    <meta property="og:description" content="Ihr Partner für nachhaltiges Bauen und exklusive Immobilien in Tübingen.">
+    <meta property="og:type" content="website">
+    <title>Gaetano Reale GmbH – Bauen mit Charakter | Tübingen</title>
+
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts: Fraunces (display) + Inter Tight (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- GSAP für Animationen -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Lenis smooth scroll -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+
+    <!-- Eigene Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-[#F5F0E8] text-[#111]">
+
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="text-center">
+            <div class="font-display text-2xl mb-6 tracking-tight">Gaetano Reale</div>
+            <div class="w-48 h-px bg-[#EDE4D5]/20 relative overflow-hidden">
+                <div class="loader-bar" id="loaderBar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cursor glow -->
+    <div class="cursor-glow hidden md:block" id="cursorGlow"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur transition-all duration-500" id="navbar">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-12 py-5 flex items-center justify-between">
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-full bg-[#111] flex items-center justify-center transition-transform duration-500 group-hover:rotate-180">
+                    <span class="font-display text-[#EDE4D5] text-lg">G</span>
+                </div>
+                <div class="leading-none">
+                    <div class="font-display text-lg tracking-tight">Gaetano Reale</div>
+                    <div class="text-[10px] uppercase tracking-[0.2em] opacity-60">GmbH · Tübingen</div>
+                </div>
+            </a>
+
+            <div class="hidden md:flex items-center gap-10 text-sm">
+                <a href="#unternehmen" class="nav-link">Unternehmen</a>
+                <a href="#leistungen" class="nav-link">Leistungen</a>
+                <a href="#objekte" class="nav-link">Objekte</a>
+                <a href="#vertrauen" class="nav-link">Vertrauen</a>
+                <a href="#kontakt" class="nav-link">Kontakt</a>
+            </div>
+
+            <a href="#kontakt" class="hidden md:inline-flex items-center gap-2 text-sm font-medium border border-[#111] rounded-full px-5 py-2.5 hover:bg-[#111] hover:text-[#EDE4D5] transition-all duration-500">
+                Beratung anfragen
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+            </a>
+
+            <button class="md:hidden w-10 h-10 flex items-center justify-center" id="menuBtn" aria-label="Menü öffnen">
+                <div class="space-y-1.5">
+                    <span class="block w-6 h-px bg-[#111]"></span>
+                    <span class="block w-6 h-px bg-[#111]"></span>
+                </div>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu fixed top-0 right-0 bottom-0 w-full md:w-96 bg-[#111] text-[#EDE4D5] z-[60] p-8" id="mobileMenu">
+        <div class="flex justify-between items-center mb-16">
+            <span class="font-display text-xl">Menü</span>
+            <button id="closeBtn" class="w-10 h-10 flex items-center justify-center" aria-label="Menü schließen">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M6 6L18 18M18 6L6 18"/></svg>
+            </button>
+        </div>
+        <nav class="space-y-6">
+            <a href="#unternehmen" class="mobile-link block font-display text-4xl">Unternehmen</a>
+            <a href="#leistungen" class="mobile-link block font-display text-4xl">Leistungen</a>
+            <a href="#objekte" class="mobile-link block font-display text-4xl">Objekte</a>
+            <a href="#vertrauen" class="mobile-link block font-display text-4xl">Vertrauen</a>
+            <a href="#kontakt" class="mobile-link block font-display text-4xl">Kontakt</a>
+        </nav>
+        <div class="absolute bottom-8 left-8 right-8 text-xs opacity-50 uppercase tracking-widest">
+            Tübingen · Seit 1999
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section id="home" class="relative min-h-screen hero-bg hero-vignette flex items-end overflow-hidden">
+        <div class="grain"></div>
+
+        <!-- Top corner labels -->
+        <div class="absolute top-24 md:top-32 left-6 lg:left-12 text-[#EDE4D5] text-[10px] md:text-xs uppercase tracking-[0.25em] md:tracking-[0.3em] opacity-70 max-w-[60%]">
+            <div class="flex items-center gap-2 md:gap-3">
+                <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-[#EDE4D5] rounded-full animate-pulse flex-shrink-0"></span>
+                <span class="truncate">Tübingen · Baden-Württemberg</span>
+            </div>
+        </div>
+
+        <div class="absolute top-32 right-6 lg:right-12 text-[#EDE4D5] text-xs uppercase tracking-[0.3em] opacity-70 text-right hidden md:block">
+            Familienbetrieb<br/>Seit MCMXCIX
+        </div>
+
+        <!-- Main content -->
+        <div class="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 pb-28 lg:pb-32 pt-32 md:pt-0 w-full text-[#EDE4D5]">
+            <div class="max-w-5xl">
+                <h1 class="hero-headline font-display text-[clamp(3.5rem,9vw,8.5rem)] leading-[0.95] tracking-tight mb-8">
+                    <span class="reveal-line"><span>Bauen</span></span>
+                    <span class="reveal-line"><span>mit <em class="italic font-light opacity-90">Charakter.</em></span></span>
+                </h1>
+
+                <div class="grid md:grid-cols-12 gap-8 items-end mt-12">
+                    <p class="md:col-span-6 text-lg lg:text-xl leading-relaxed opacity-85 reveal-fade">
+                        Seit über 25 Jahren entstehen unter unserer Hand Häuser, die nicht nur halten — sondern bleiben. Persönlich geführt, regional verwurzelt, präzise umgesetzt.
+                    </p>
+
+                    <div class="md:col-span-6 flex flex-wrap items-center gap-4 md:justify-end reveal-fade">
+                        <a href="#objekte" class="btn-primary inline-flex items-center gap-3 bg-[#EDE4D5] text-[#111] rounded-full px-7 py-4 text-sm font-medium hover:text-[#EDE4D5]">
+                            <span>Aktuelle Objekte ansehen</span>
+                            <span class="w-7 h-7 rounded-full bg-[#111]/10 flex items-center justify-center group-hover:bg-[#EDE4D5]/20 transition-colors">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                            </span>
+                        </a>
+                        <a href="#kontakt" class="btn-ghost text-sm font-medium pb-1">
+                            Kontakt aufnehmen
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom info bar -->
+        <div class="absolute bottom-4 md:bottom-6 left-6 right-6 lg:left-12 lg:right-12 z-10 flex items-center justify-between text-[#EDE4D5] text-[10px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.25em] opacity-70 pointer-events-none">
+            <div class="flex items-center gap-2">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+                Scroll
+            </div>
+            <div class="hidden md:block">© MMXXVI · Reale Bauen</div>
+        </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <section class="bg-[#111] text-[#EDE4D5] py-8 overflow-hidden border-y border-[#EDE4D5]/10">
+        <div class="marquee-track whitespace-nowrap">
+            <div class="flex items-center gap-16 px-8 font-display text-3xl md:text-4xl">
+                <span>Hochbau</span><span class="opacity-40">✦</span>
+                <span class="italic opacity-70">Tiefbau</span><span class="opacity-40">✦</span>
+                <span>Schlüsselfertig</span><span class="opacity-40">✦</span>
+                <span class="italic opacity-70">Sanierung</span><span class="opacity-40">✦</span>
+                <span>Immobilien</span><span class="opacity-40">✦</span>
+                <span class="italic opacity-70">Bauträger</span><span class="opacity-40">✦</span>
+            </div>
+            <div class="flex items-center gap-16 px-8 font-display text-3xl md:text-4xl" aria-hidden="true">
+                <span>Hochbau</span><span class="opacity-40">✦</span>
+                <span class="italic opacity-70">Tiefbau</span><span class="opacity-40">✦</span>
+                <span>Schlüsselfertig</span><span class="opacity-40">✦</span>
+                <span class="italic opacity-70">Sanierung</span><span class="opacity-40">✦</span>
+                <span>Immobilien</span><span class="opacity-40">✦</span>
+                <span class="italic opacity-70">Bauträger</span><span class="opacity-40">✦</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ÜBER UNS -->
+    <section id="unternehmen" class="py-24 lg:py-40 px-6 lg:px-12 relative">
+        <div class="max-w-[1400px] mx-auto">
+            <div class="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+
+                <div class="lg:col-span-5 lg:sticky lg:top-32">
+                    <div class="text-xs uppercase tracking-[0.3em] opacity-60 mb-8 flex items-center gap-3 fade-in">
+                        <span class="w-8 h-px bg-[#111]"></span>
+                        01 · Unternehmen
+                    </div>
+                    <h2 class="font-display text-5xl lg:text-7xl leading-[0.95] tracking-tight mb-10 fade-in">
+                        Ein Name.<br/>
+                        <em class="italic font-light">Ein Versprechen.</em>
+                    </h2>
+                    <a href="#kontakt" class="btn-ghost inline-flex text-sm font-medium pb-1 fade-in">Lernen Sie uns kennen</a>
+                </div>
+
+                <div class="lg:col-span-7 space-y-12">
+                    <div class="reveal-mask aspect-[4/3] rounded-sm overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1600&q=85"
+                             alt="Bauleiter auf einer Baustelle in Tübingen"
+                             class="w-full h-full object-cover">
+                    </div>
+
+                    <div class="space-y-6 max-w-xl fade-in">
+                        <p class="font-display text-2xl lg:text-3xl leading-tight">
+                            Seit 1999 baut die Familie Reale Häuser, die für Generationen gedacht sind — kein Bauauftrag, sondern eine Beziehung.
+                        </p>
+                        <p class="text-base leading-relaxed opacity-75">
+                            Was Gaetano Reale 1999 in Tübingen begründete, führen wir heute mit der gleichen Haltung weiter: Jeder Bau ist persönlich. Wir sind klein genug, um zuzuhören. Groß genug, um Großes umzusetzen. Und vor allem regional verwurzelt — was wir bauen, sehen wir täglich auf dem Heimweg.
+                        </p>
+                        <p class="text-base leading-relaxed opacity-75">
+                            Als Bauunternehmen <em>und</em> Immobilienentwickler begleiten wir Sie nicht nur durch das Bauen — sondern durch das gesamte Vorhaben. Von der ersten Skizze bis zum Schlüssel in der Hand.
+                        </p>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="grid grid-cols-3 gap-4 sm:gap-6 lg:gap-12 pt-10 border-t border-[#111]/10 fade-in">
+                        <div>
+                            <div class="font-display text-4xl sm:text-5xl lg:text-6xl stat-number" data-target="25">0</div>
+                            <div class="text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] opacity-60 mt-2">Jahre<br/>Erfahrung</div>
+                        </div>
+                        <div>
+                            <div class="font-display text-4xl sm:text-5xl lg:text-6xl stat-number" data-target="180">0</div>
+                            <div class="text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] opacity-60 mt-2">Realisierte<br/>Projekte</div>
+                        </div>
+                        <div>
+                            <div class="font-display text-4xl sm:text-5xl lg:text-6xl stat-number">4,7<span class="text-lg sm:text-2xl opacity-60">★</span></div>
+                            <div class="text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] opacity-60 mt-2">Kunden-<br/>bewertung</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- LEISTUNGEN -->
+    <section id="leistungen" class="bg-[#EDE4D5] py-24 lg:py-40 px-6 lg:px-12 relative overflow-hidden">
+        <div class="grain"></div>
+        <div class="max-w-[1400px] mx-auto relative">
+
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-20 gap-8">
+                <div>
+                    <div class="text-xs uppercase tracking-[0.3em] opacity-60 mb-8 flex items-center gap-3 fade-in">
+                        <span class="w-8 h-px bg-[#111]"></span>
+                        02 · Leistungen
+                    </div>
+                    <h2 class="font-display text-5xl lg:text-7xl leading-[0.95] tracking-tight max-w-3xl fade-in">
+                        Vom Aushub<br/>bis zum <em class="italic font-light">Aushang.</em>
+                    </h2>
+                </div>
+                <p class="max-w-md text-base opacity-75 fade-in">
+                    Fünf Disziplinen unter einem Dach. Sie führen ein einziges Gespräch — wir koordinieren den Rest.
+                </p>
+            </div>
+
+            <div class="border-t border-[#111]/10">
+
+                <a href="#kontakt" class="service-card group block border-b border-[#111]/10 py-10 lg:py-12 px-4 lg:px-8 -mx-4 lg:-mx-8">
+                    <div class="service-content grid grid-cols-12 gap-6 items-center">
+                        <div class="col-span-2 lg:col-span-1 service-number font-display text-2xl opacity-30">01</div>
+                        <div class="col-span-7 lg:col-span-5">
+                            <h3 class="font-display text-3xl lg:text-5xl tracking-tight">Hoch- &amp; Tiefbau</h3>
+                        </div>
+                        <div class="hidden lg:block lg:col-span-5 text-sm opacity-70 leading-relaxed">
+                            Schlüsselfertige Neubauten, Rohbau, Erdarbeiten und Fundamentierung. Von der Bodenplatte bis zur Dachkonstruktion — alles aus einer Hand, mit eigenem Team.
+                        </div>
+                        <div class="col-span-3 lg:col-span-1 flex justify-end">
+                            <svg class="service-arrow" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="transform: rotate(-45deg)"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#kontakt" class="service-card group block border-b border-[#111]/10 py-10 lg:py-12 px-4 lg:px-8 -mx-4 lg:-mx-8">
+                    <div class="service-content grid grid-cols-12 gap-6 items-center">
+                        <div class="col-span-2 lg:col-span-1 service-number font-display text-2xl opacity-30">02</div>
+                        <div class="col-span-7 lg:col-span-5">
+                            <h3 class="font-display text-3xl lg:text-5xl tracking-tight"><em class="italic font-light">Montage</em> &amp; Trockenbau</h3>
+                        </div>
+                        <div class="hidden lg:block lg:col-span-5 text-sm opacity-70 leading-relaxed">
+                            Innenausbau, Trennwände, abgehängte Decken, Dämmung. Sauberes, präzises Handwerk — auch in bestehenden Gebäuden ohne Staub und Lärm.
+                        </div>
+                        <div class="col-span-3 lg:col-span-1 flex justify-end">
+                            <svg class="service-arrow" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="transform: rotate(-45deg)"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#kontakt" class="service-card group block border-b border-[#111]/10 py-10 lg:py-12 px-4 lg:px-8 -mx-4 lg:-mx-8">
+                    <div class="service-content grid grid-cols-12 gap-6 items-center">
+                        <div class="col-span-2 lg:col-span-1 service-number font-display text-2xl opacity-30">03</div>
+                        <div class="col-span-7 lg:col-span-5">
+                            <h3 class="font-display text-3xl lg:text-5xl tracking-tight">Projekt&shy;entwicklung</h3>
+                        </div>
+                        <div class="hidden lg:block lg:col-span-5 text-sm opacity-70 leading-relaxed">
+                            Als Bauherr und Baubetreuer entwickeln wir Wohn- und Gewerbeobjekte vom Grundstück bis zur Übergabe — Sie investieren, wir verantworten.
+                        </div>
+                        <div class="col-span-3 lg:col-span-1 flex justify-end">
+                            <svg class="service-arrow" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="transform: rotate(-45deg)"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#kontakt" class="service-card group block border-b border-[#111]/10 py-10 lg:py-12 px-4 lg:px-8 -mx-4 lg:-mx-8">
+                    <div class="service-content grid grid-cols-12 gap-6 items-center">
+                        <div class="col-span-2 lg:col-span-1 service-number font-display text-2xl opacity-30">04</div>
+                        <div class="col-span-7 lg:col-span-5">
+                            <h3 class="font-display text-3xl lg:text-5xl tracking-tight">Immobilien&shy;<em class="italic font-light">vermittlung</em></h3>
+                        </div>
+                        <div class="hidden lg:block lg:col-span-5 text-sm opacity-70 leading-relaxed">
+                            Verkauf eigener Neubauprojekte und ausgewählter Bestandsobjekte in Tübingen und Umgebung. Diskret, qualifiziert, regional.
+                        </div>
+                        <div class="col-span-3 lg:col-span-1 flex justify-end">
+                            <svg class="service-arrow" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="transform: rotate(-45deg)"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#kontakt" class="service-card group block border-b border-[#111]/10 py-10 lg:py-12 px-4 lg:px-8 -mx-4 lg:-mx-8">
+                    <div class="service-content grid grid-cols-12 gap-6 items-center">
+                        <div class="col-span-2 lg:col-span-1 service-number font-display text-2xl opacity-30">05</div>
+                        <div class="col-span-7 lg:col-span-5">
+                            <h3 class="font-display text-3xl lg:text-5xl tracking-tight">Sanitär &amp; Service</h3>
+                        </div>
+                        <div class="hidden lg:block lg:col-span-5 text-sm opacity-70 leading-relaxed">
+                            Bäder, Heizung, Wartung, Kleinreparaturen. Auch nach der Schlüsselübergabe bleiben wir Ihr Ansprechpartner — meist innerhalb von 48 Stunden vor Ort.
+                        </div>
+                        <div class="col-span-3 lg:col-span-1 flex justify-end">
+                            <svg class="service-arrow" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="transform: rotate(-45deg)"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- AKTUELLE OBJEKTE -->
+    <section id="objekte" class="py-24 lg:py-40 px-6 lg:px-12">
+        <div class="max-w-[1400px] mx-auto">
+
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16 gap-8">
+                <div>
+                    <div class="text-xs uppercase tracking-[0.3em] opacity-60 mb-8 flex items-center gap-3 fade-in">
+                        <span class="w-8 h-px bg-[#111]"></span>
+                        03 · Objekte
+                    </div>
+                    <h2 class="font-display text-5xl lg:text-7xl leading-[0.95] tracking-tight fade-in">
+                        Im <em class="italic font-light">Verkauf.</em>
+                    </h2>
+                </div>
+                <a href="#kontakt" class="btn-ghost text-sm font-medium pb-1 fade-in">Alle Objekte anfragen</a>
+            </div>
+
+            <!-- Asymmetrisches Grid -->
+            <div class="grid lg:grid-cols-12 gap-6 lg:gap-8">
+
+                <!-- Hero project -->
+                <article class="project-card lg:col-span-8 lg:row-span-2 group cursor-pointer fade-in" data-img="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=2400&q=85">
+                    <div class="aspect-[4/3] lg:aspect-[16/12] overflow-hidden bg-[#111]">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1800&q=85"
+                             alt="Villa Reutlinger Straße"
+                             class="project-image w-full h-full object-cover">
+                    </div>
+                    <div class="pt-6 grid grid-cols-12 gap-4">
+                        <div class="col-span-8">
+                            <div class="text-xs uppercase tracking-[0.25em] opacity-60 mb-2">Tübingen-Lustnau · Neubau</div>
+                            <h3 class="font-display text-3xl lg:text-4xl tracking-tight">Villa Reutlinger Höhe</h3>
+                        </div>
+                        <div class="col-span-4 text-right">
+                            <div class="font-display text-2xl">€ 1.485.000</div>
+                            <div class="text-xs opacity-60 mt-1">5,5 Zi · 198 m²</div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Side projects -->
+                <article class="project-card lg:col-span-4 group cursor-pointer fade-in" data-img="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=2400&q=85">
+                    <div class="aspect-[4/3] overflow-hidden bg-[#111]">
+                        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&q=85"
+                             alt="Stadthaus Neckarviertel"
+                             class="project-image w-full h-full object-cover">
+                    </div>
+                    <div class="pt-5">
+                        <div class="text-xs uppercase tracking-[0.25em] opacity-60 mb-2">Tübingen-Süd · Sanierung</div>
+                        <h3 class="font-display text-2xl tracking-tight mb-1">Stadthaus Neckarblick</h3>
+                        <div class="flex items-end justify-between mt-3 text-sm">
+                            <span class="opacity-60">3,5 Zi · 112 m²</span>
+                            <span class="font-display text-lg">€ 745.000</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card lg:col-span-4 group cursor-pointer fade-in" data-img="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=2400&q=85">
+                    <div class="aspect-[4/3] overflow-hidden bg-[#111]">
+                        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&q=85"
+                             alt="Doppelhaushälfte Rottenburg"
+                             class="project-image w-full h-full object-cover">
+                    </div>
+                    <div class="pt-5">
+                        <div class="text-xs uppercase tracking-[0.25em] opacity-60 mb-2">Rottenburg · Neubau</div>
+                        <h3 class="font-display text-2xl tracking-tight mb-1">Doppelhaushälfte „Am Wald"</h3>
+                        <div class="flex items-end justify-between mt-3 text-sm">
+                            <span class="opacity-60">4,5 Zi · 142 m²</span>
+                            <span class="font-display text-lg">€ 689.000</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card lg:col-span-6 group cursor-pointer fade-in" data-img="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=2400&q=85">
+                    <div class="aspect-[16/10] overflow-hidden bg-[#111]">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600&q=85"
+                             alt="Mehrfamilienhaus Mössingen"
+                             class="project-image w-full h-full object-cover">
+                    </div>
+                    <div class="pt-5 grid grid-cols-12 gap-4">
+                        <div class="col-span-8">
+                            <div class="text-xs uppercase tracking-[0.25em] opacity-60 mb-2">Mössingen · Bauträger</div>
+                            <h3 class="font-display text-2xl lg:text-3xl tracking-tight">Wohnhof Belsenplatz</h3>
+                        </div>
+                        <div class="col-span-4 text-right">
+                            <div class="font-display text-xl">ab € 489.000</div>
+                            <div class="text-xs opacity-60 mt-1">6 Einheiten</div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card lg:col-span-6 group cursor-pointer fade-in" data-img="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=2400&q=85">
+                    <div class="aspect-[16/10] overflow-hidden bg-[#111]">
+                        <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1600&q=85"
+                             alt="Penthouse Tübingen"
+                             class="project-image w-full h-full object-cover">
+                    </div>
+                    <div class="pt-5 grid grid-cols-12 gap-4">
+                        <div class="col-span-8">
+                            <div class="text-xs uppercase tracking-[0.25em] opacity-60 mb-2">Tübingen-Wanne · Penthouse</div>
+                            <h3 class="font-display text-2xl lg:text-3xl tracking-tight">Penthouse <em class="italic font-light">Wanneblick</em></h3>
+                        </div>
+                        <div class="col-span-4 text-right">
+                            <div class="font-display text-xl">€ 1.150.000</div>
+                            <div class="text-xs opacity-60 mt-1">3,5 Zi · 138 m²</div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- VERTRAUEN / WARUM WIR -->
+    <section id="vertrauen" class="bg-[#111] text-[#EDE4D5] py-24 lg:py-40 px-6 lg:px-12 relative overflow-hidden">
+        <div class="grain"></div>
+
+        <div class="max-w-[1400px] mx-auto relative">
+
+            <div class="grid lg:grid-cols-12 gap-12 mb-20">
+                <div class="lg:col-span-5">
+                    <div class="text-xs uppercase tracking-[0.3em] opacity-60 mb-8 flex items-center gap-3 fade-in">
+                        <span class="w-8 h-px bg-[#EDE4D5]/40"></span>
+                        04 · Warum wir
+                    </div>
+                    <h2 class="font-display text-5xl lg:text-7xl leading-[0.95] tracking-tight fade-in">
+                        Vertrauen<br/>baut <em class="italic font-light">man.</em>
+                    </h2>
+                </div>
+                <div class="lg:col-span-6 lg:col-start-7 flex flex-col justify-end fade-in">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="flex gap-1">
+                            <span class="text-xl">★</span>
+                            <span class="text-xl">★</span>
+                            <span class="text-xl">★</span>
+                            <span class="text-xl">★</span>
+                            <span class="text-xl opacity-60">★</span>
+                        </div>
+                        <span class="text-sm opacity-70">4,7 / 5,0 · 124 Bewertungen</span>
+                    </div>
+                    <p class="font-display text-2xl lg:text-3xl leading-tight">
+                        „Wer einmal mit Reale baut, baut nicht mehr mit jemand anderem. Punkt."
+                    </p>
+                    <p class="text-sm opacity-60 mt-4">— M. Hartmann, Bauherr Mössingen</p>
+                </div>
+            </div>
+
+            <!-- Pillars grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-[#EDE4D5]/10">
+
+                <div class="bg-[#111] p-8 lg:p-10 fade-in">
+                    <div class="font-display text-5xl mb-6 opacity-40">01</div>
+                    <h3 class="font-display text-2xl mb-3">Persönlich</h3>
+                    <p class="text-sm opacity-70 leading-relaxed">Sie sprechen mit dem Bauherrn, nicht mit einem Callcenter. Eine Nummer. Ein Name. Der ganze Bau lang.</p>
+                </div>
+
+                <div class="bg-[#111] p-8 lg:p-10 fade-in">
+                    <div class="font-display text-5xl mb-6 opacity-40">02</div>
+                    <h3 class="font-display text-2xl mb-3">Pünktlich</h3>
+                    <p class="text-sm opacity-70 leading-relaxed">Wir nennen Übergabetermine — und halten sie. 94 % unserer Projekte schlossen 2024 fristgerecht ab.</p>
+                </div>
+
+                <div class="bg-[#111] p-8 lg:p-10 fade-in">
+                    <div class="font-display text-5xl mb-6 opacity-40">03</div>
+                    <h3 class="font-display text-2xl mb-3">Präzise</h3>
+                    <p class="text-sm opacity-70 leading-relaxed">Eigene Maurer, eigene Trockenbauer, eigene Sanitärinstallation. Wir koordinieren keine Subunternehmen — wir <em>sind</em> sie.</p>
+                </div>
+
+                <div class="bg-[#111] p-8 lg:p-10 fade-in">
+                    <div class="font-display text-5xl mb-6 opacity-40">04</div>
+                    <h3 class="font-display text-2xl mb-3">Regional</h3>
+                    <p class="text-sm opacity-70 leading-relaxed">Tübingen, Rottenburg, Mössingen, Reutlingen. Wir kennen jeden Bebauungsplan, jedes Bauamt, jedes Grundstück persönlich.</p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section id="kontakt" class="bg-[#2F3E2E] text-[#EDE4D5] py-24 lg:py-32 px-6 lg:px-12 relative overflow-hidden">
+        <div class="grain"></div>
+
+        <div class="max-w-[1400px] mx-auto relative">
+
+            <div class="text-xs uppercase tracking-[0.3em] opacity-60 mb-8 flex items-center gap-3 fade-in">
+                <span class="w-8 h-px bg-[#EDE4D5]/40"></span>
+                05 · Kontakt
+            </div>
+
+            <h2 class="font-display text-5xl lg:text-8xl leading-[0.95] tracking-tight mb-16 lg:mb-24 fade-in">
+                Lassen Sie uns<br/><em class="italic font-light">reden.</em>
+            </h2>
+
+            <div class="grid lg:grid-cols-12 gap-12 lg:gap-20">
+
+                <!-- Form -->
+                <form class="lg:col-span-7 space-y-6 fade-in" id="contactForm">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="text-xs uppercase tracking-[0.2em] opacity-60 block mb-2">Name</label>
+                            <input type="text" required class="input-field" placeholder="Vor- &amp; Nachname">
+                        </div>
+                        <div>
+                            <label class="text-xs uppercase tracking-[0.2em] opacity-60 block mb-2">Telefon</label>
+                            <input type="tel" class="input-field" placeholder="+49 …">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-xs uppercase tracking-[0.2em] opacity-60 block mb-2">E-Mail</label>
+                        <input type="email" required class="input-field" placeholder="ihr.name@beispiel.de">
+                    </div>
+                    <div>
+                        <label class="text-xs uppercase tracking-[0.2em] opacity-60 block mb-2">Worum geht es?</label>
+                        <textarea class="input-field" placeholder="Erzählen Sie uns von Ihrem Vorhaben…"></textarea>
+                    </div>
+
+                    <div class="pt-6 flex flex-col md:flex-row md:items-center gap-6 md:justify-between">
+                        <div class="text-xs opacity-60 max-w-sm">
+                            Mit dem Absenden stimmen Sie unserer Datenschutzerklärung zu. Wir antworten persönlich, meist innerhalb von 24 Stunden.
+                        </div>
+                        <button type="submit" class="btn-primary inline-flex items-center gap-3 bg-[#EDE4D5] text-[#111] rounded-full px-7 py-4 text-sm font-medium hover:text-[#EDE4D5]">
+                            <span>Nachricht senden</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Info -->
+                <div class="lg:col-span-5 space-y-10 fade-in">
+
+                    <div>
+                        <div class="text-xs uppercase tracking-[0.2em] opacity-60 mb-3">Direkt</div>
+                        <a href="tel:+497071234567" class="font-display text-2xl block hover:opacity-70 transition-opacity">+49 7071 23 45 67</a>
+                        <a href="mailto:bau@reale-tuebingen.de" class="font-display text-2xl block hover:opacity-70 transition-opacity italic font-light">bau@reale-tuebingen.de</a>
+                    </div>
+
+                    <div>
+                        <div class="text-xs uppercase tracking-[0.2em] opacity-60 mb-3">Adresse</div>
+                        <p class="text-base leading-relaxed">
+                            Gaetano Reale GmbH<br/>
+                            Reutlinger Straße 142<br/>
+                            72072 Tübingen<br/>
+                            Baden-Württemberg
+                        </p>
+                    </div>
+
+                    <div>
+                        <div class="text-xs uppercase tracking-[0.2em] opacity-60 mb-3">Öffnungszeiten</div>
+                        <div class="space-y-1 text-base">
+                            <div class="flex justify-between max-w-xs"><span>Mo – Fr</span><span class="opacity-70">07:30 – 17:00</span></div>
+                            <div class="flex justify-between max-w-xs"><span>Sa</span><span class="opacity-70">nach Vereinbarung</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Map -->
+                    <div class="map-frame aspect-[4/3] overflow-hidden rounded-sm">
+                        <iframe
+                            src="https://www.openstreetmap.org/export/embed.html?bbox=9.0%2C48.51%2C9.08%2C48.54&amp;layer=mapnik&amp;marker=48.521%2C9.057"
+                            class="w-full h-full grayscale opacity-90"
+                            style="border:0; filter: invert(0.9) hue-rotate(180deg) grayscale(0.5);"
+                            loading="lazy"
+                            title="Standort Tübingen"></iframe>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#111] text-[#EDE4D5] py-16 px-6 lg:px-12 border-t border-[#EDE4D5]/10">
+        <div class="max-w-[1400px] mx-auto">
+
+            <div class="font-display text-[clamp(3rem,12vw,11rem)] leading-[0.85] tracking-tight mb-12">
+                Reale<em class="italic font-light opacity-70">.</em>
+            </div>
+
+            <div class="grid md:grid-cols-12 gap-8 pt-8 border-t border-[#EDE4D5]/10">
+                <div class="md:col-span-4">
+                    <div class="text-xs uppercase tracking-[0.2em] opacity-50 mb-3">Gaetano Reale GmbH</div>
+                    <p class="text-sm opacity-70 leading-relaxed">
+                        Bauunternehmen &amp; Immobilienentwickler<br/>
+                        Reutlinger Straße 142, 72072 Tübingen
+                    </p>
+                </div>
+
+                <div class="md:col-span-3">
+                    <div class="text-xs uppercase tracking-[0.2em] opacity-50 mb-3">Navigation</div>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#unternehmen" class="opacity-70 hover:opacity-100 transition-opacity">Unternehmen</a></li>
+                        <li><a href="#leistungen" class="opacity-70 hover:opacity-100 transition-opacity">Leistungen</a></li>
+                        <li><a href="#objekte" class="opacity-70 hover:opacity-100 transition-opacity">Objekte</a></li>
+                        <li><a href="#kontakt" class="opacity-70 hover:opacity-100 transition-opacity">Kontakt</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-3">
+                    <div class="text-xs uppercase tracking-[0.2em] opacity-50 mb-3">Rechtliches</div>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="opacity-70 hover:opacity-100 transition-opacity">Impressum</a></li>
+                        <li><a href="#" class="opacity-70 hover:opacity-100 transition-opacity">Datenschutz</a></li>
+                        <li><a href="#" class="opacity-70 hover:opacity-100 transition-opacity">AGB</a></li>
+                        <li><a href="#" class="opacity-70 hover:opacity-100 transition-opacity">Cookie-Einstellungen</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-2 md:text-right">
+                    <div class="text-xs uppercase tracking-[0.2em] opacity-50 mb-3">© MMXXVI</div>
+                    <p class="text-sm opacity-70">Mit Sorgfalt<br/>gebaut in Tübingen.</p>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <img id="lightboxImg" src="" alt="Projekt Großansicht">
+        <button class="absolute top-8 right-8 text-[#EDE4D5] w-12 h-12 flex items-center justify-center" id="lightboxClose" aria-label="Schließen">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M6 6L18 18M18 6L6 18"/></svg>
+        </button>
+    </div>
+
+    <!-- Eigene Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
